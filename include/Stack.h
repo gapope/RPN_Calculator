@@ -11,8 +11,8 @@ class Stack
         virtual ~Stack();
 
 
-        void Push(char data);
-        char Pop();
+        void Push(int data);
+        int Pop();
 
     private:
         Node *head;
