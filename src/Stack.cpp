@@ -8,8 +8,6 @@ void Stack::Push(char data) {
     newNode->Setnext(head);
 
     head = newNode;
-
-    //this = temp;
 }
 
 char Stack::Pop() {
@@ -18,7 +16,7 @@ char Stack::Pop() {
         return '*';
     }
 
-    char temp = head->Value();
+    int temp = head->Value();
 
     head = head->Next();
 
