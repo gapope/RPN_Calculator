@@ -1,22 +1,26 @@
 #include "Stack.h"
+#include <iostream>
 
-Stack::Stack()
-{
-    //ctor
+void Stack::Push(char data) {
+    Node* newNode = new Node();
+
+    newNode->Setvalue(data);
+    newNode->Setnext(head);
+
+    head = newNode;
+
+    //this = temp;
 }
 
-void push(char data) {
-    Stack *temp = new Stack;
+char Stack::Pop() {
+    if (head == nullptr) {
+        std::cerr << "Accessing empty stack" << std::endl;
+        return '*';
+    }
 
-    temp->value = data;
-    temp->next = this;
+    char temp = head->Value();
 
-    this = temp;
-}
-
-char pop() {
-    char temp = value;
-    this = this.next;
+    head = head->Next();
 
     return temp;
 }

@@ -34,8 +34,12 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/Calculator.h" />
+		<Unit filename="include/Node.h" />
 		<Unit filename="include/Stack.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Calculator.cpp" />
+		<Unit filename="src/Node.cpp" />
 		<Unit filename="src/Stack.cpp" />
 		<Extensions>
 			<code_completion />

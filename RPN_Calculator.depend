@@ -1,4 +1,17 @@
 # depslib dependency file v1.0
-1446671344 source:d:\gregp\rpn_calculator\main.cpp
+1508870159 source:d:\gregp\rpn_calculator\main.cpp
+	<iostream>
+	"Stack.h"
+
+1508870065 d:\gregp\rpn_calculator\include\stack.h
+	"Node.h"
+
+1508869381 d:\gregp\rpn_calculator\include\node.h
+
+1508867690 source:d:\gregp\rpn_calculator\src\node.cpp
+	"Node.h"
+
+1508870079 source:d:\gregp\rpn_calculator\src\stack.cpp
+	"Stack.h"
 	<iostream>
 
