@@ -14,29 +14,60 @@
  *****************************************************************************/
 
 #include <iostream>
-#include "Stack.h"
+#include "Calculator.h"
 
 using namespace std;
 
+int intakeNum(Calculator &myCalc);
+
 int main()
 {
-    //Node head('a');
+    Calculator myCalc;
 
-    Stack myStack;
+    bool running = true;
 
-    myStack.Push('a');
-    myStack.Push('e');
-    myStack.Push('f');
-    myStack.Push('5');
+    int nums = 0;
 
+    while (running) {
+        char inputC = 'a';
 
-    //char hold = head.pop();
+        if (nums < 2) {
+            nums += intakeNum(myCalc);
+        } else {
+            cout << "Please enter an operator (+, -, *, /): ";
+            cin >> inputC;
 
-    //cout << head.Value() << endl;
+            if (!myCalc.PushOp(inputC)) {
+                cout << "That is not a valid operator" << endl;
+            }
 
-    cout << myStack.Pop() << endl;
-    cout << myStack.Pop() << endl;
-    cout << myStack.Pop() << endl;
-    cout << myStack.Pop() << endl;
+            cout << myCalc.Pop()<< endl;
+
+            cout << "This equals: ";
+            cout << myCalc.Operate() << endl;
+
+            nums--;
+        }
+
+        if (inputC == 'q' || inputC == 'Q') {
+            running = false;
+        }
+    }
+
     return 0;
+}
+
+int intakeNum(Calculator &myCalc) {
+    float input = 0;
+
+    cout << "Please enter a number: ";
+    if (!(cin >> input)) {
+        cerr << "That was not a valid number" << endl;
+        cin.clear();
+        return 0;
+    }
+
+    myCalc.Push(input);
+
+    return 1;
 }

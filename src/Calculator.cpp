@@ -5,24 +5,57 @@ Calculator::Calculator()
     //ctor
 }
 
-int Calculator::Operate() {
+float Calculator::Operate() {
     int op = this->Pop();
 
-    int intA = this->Pop();
-    int intB = this->Pop();
+    float fA = this->Pop();
+    float fB = this->Pop();
+
+    float output = 0;
 
     switch (op) {
         case 0:
-            return intB + intA;
+            output = fB + fA;
         case 1:
-            return intB - intA;
+            output = fB - fA;
         case 3:
-            return intB * intA;
+            output = fB * fA;
         case 4:
-            return intB / intA;
+            output = fB / fA;
         default:
-            return -1;
+            output = -1;
     }
+
+    this->Push(output);
+    return output;
+}
+
+bool Calculator::PushOp(char data) {
+    Node* newNode = new Node();
+
+    switch (data) {
+        case '+':
+            newNode->Setvalue(0);
+            break;
+        case '-':
+            newNode->Setvalue(1);
+            break;
+        case '*':
+            newNode->Setvalue(2);
+            break;
+        case '/':
+            newNode->Setvalue(3);
+            break;
+        default:
+            return false;
+    }
+
+
+    newNode->Setnext(head);
+
+    head = newNode;
+
+    return true;
 }
 
 Calculator::~Calculator()

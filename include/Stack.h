@@ -10,11 +10,12 @@ class Stack
         Stack(Node link) {head = &link; head->Setnext(nullptr);}
         virtual ~Stack();
 
+        Node* Head() {return head;}
 
-        void Push(int data);
-        int Pop();
+        void Push(float data);
+        float Pop();
 
-    private:
+    protected:
         Node *head;
 };
 

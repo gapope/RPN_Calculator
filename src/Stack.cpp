@@ -1,7 +1,7 @@
 #include "Stack.h"
 #include <iostream>
 
-void Stack::Push(char data) {
+void Stack::Push(float data) {
     Node* newNode = new Node();
 
     newNode->Setvalue(data);
@@ -10,13 +10,13 @@ void Stack::Push(char data) {
     head = newNode;
 }
 
-char Stack::Pop() {
+float Stack::Pop() {
     if (head == nullptr) {
         std::cerr << "Accessing empty stack" << std::endl;
-        return '*';
+        return -1;
     }
 
-    int temp = head->Value();
+    float temp = head->Value();
 
     head = head->Next();
 

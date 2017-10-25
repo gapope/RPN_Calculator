@@ -6,18 +6,18 @@ class Node
 {
     public:
         Node();
-        Node(int val) {value = val;}
+        Node(float val) {value = val;}
         virtual ~Node();
 
         char Value() { return value; }
-        void Setvalue(int val) { value = val; }
+        void Setvalue(float val) { value = val; }
         Node* Next() { return next; }
         void Setnext(Node* val) { next = val; }
 
     protected:
 
     private:
-        int value;
+        float value;
         Node* next;
 };
 
