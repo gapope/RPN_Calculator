@@ -6,8 +6,8 @@
 class Stack
 {
     public:
-        Stack() {head = nullptr;}
-        Stack(Node link) {head = &link; head->Setnext(nullptr);}
+        Stack() {head = nullptr; valid = false;}
+        Stack(Node link) {head = &link; head->Setnext(nullptr); valid = true;}
         virtual ~Stack();
 
         Node* Head() {return head;}
@@ -17,6 +17,7 @@ class Stack
 
     protected:
         Node *head;
+        bool valid;
 };
 
 #endif // STACK_H

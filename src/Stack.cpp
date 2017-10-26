@@ -8,11 +8,14 @@ void Stack::Push(float data) {
     newNode->Setnext(head);
 
     head = newNode;
+
+    valid = true;
 }
 
 float Stack::Pop() {
     if (head == nullptr) {
         std::cerr << "Accessing empty stack" << std::endl;
+        valid = false;
         return -1;
     }
 

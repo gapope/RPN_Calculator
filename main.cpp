@@ -14,14 +14,34 @@
  *****************************************************************************/
 
 #include <iostream>
+#include <cstring>
 #include "Calculator.h"
+#include <windows.h>
+#include <ctime>
 
 using namespace std;
 
 int intakeNum(Calculator &myCalc);
+void buildScreen(short width);
+void buildSides(short width);
+void buildTop(short width);
+void buildBottom(short width);
+
+
+//Defines gotoxy() for ANSI C compilers.
+void gotoxy(short x, short y) {
+	COORD pos = {x, y};
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
+}
+
 
 int main()
 {
+    buildScreen(25);
+    int intake;
+    cin >> intake;
+
+    /*
     Calculator myCalc;
 
     bool running = true;
@@ -52,7 +72,7 @@ int main()
         if (inputC == 'q' || inputC == 'Q') {
             running = false;
         }
-    }
+    }*/
 
     return 0;
 }
@@ -70,4 +90,45 @@ int intakeNum(Calculator &myCalc) {
     myCalc.Push(input);
 
     return 1;
+}
+
+void buildScreen(short width) {
+    buildTop(width);
+    buildSides(width);
+    buildBottom(width);
+
+}
+
+void buildSides(short width) {
+    char  vert = (char) (179);
+
+    cout << vert;
+
+    gotoxy(width + 1, 1);
+
+    cout << vert << endl;
+}
+
+void buildTop(short width) {
+    char topLeft = (218), hor = (196), topRight = (191);
+
+    cout << topLeft;
+
+    for (int i = 0; i < width; i++) {
+        cout << hor;
+    }
+
+    cout << topRight << endl;
+}
+
+void buildBottom(short width) {
+    char bottomLeft = (192), hor = (196), bottomRight = (217);
+
+    cout << bottomLeft;
+
+    for (int i = 0; i < width; i++) {
+        cout << hor;
+    }
+
+    cout << bottomRight << endl;
 }

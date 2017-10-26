@@ -10,8 +10,9 @@ class Calculator : public Stack
         Calculator();
         virtual ~Calculator();
 
-        float Operate();
         bool PushOp(char data);
+        float Operate();
+        bool Swap();
 
     protected:
 

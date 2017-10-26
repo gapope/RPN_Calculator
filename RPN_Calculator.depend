@@ -1,9 +1,12 @@
 # depslib dependency file v1.0
-1508961358 source:d:\gregp\rpn_calculator\main.cpp
+1509042156 source:d:\gregp\rpn_calculator\main.cpp
 	<iostream>
+	<cstring>
 	"Calculator.h"
+	<windows.h>
+	<ctime>
 
-1508958519 d:\gregp\rpn_calculator\include\stack.h
+1509042276 d:\gregp\rpn_calculator\include\stack.h
 	"Node.h"
 
 1508958519 d:\gregp\rpn_calculator\include\node.h
@@ -11,13 +14,13 @@
 1508957263 source:d:\gregp\rpn_calculator\src\node.cpp
 	"Node.h"
 
-1508961351 source:d:\gregp\rpn_calculator\src\stack.cpp
+1509042382 source:d:\gregp\rpn_calculator\src\stack.cpp
 	"Stack.h"
 	<iostream>
 
-1508961447 source:d:\gregp\rpn_calculator\src\calculator.cpp
+1509042382 source:d:\gregp\rpn_calculator\src\calculator.cpp
 	"Calculator.h"
 
-1508961152 d:\gregp\rpn_calculator\include\calculator.h
+1509042168 d:\gregp\rpn_calculator\include\calculator.h
 	<Stack.h>
 
