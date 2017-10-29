@@ -11,9 +11,11 @@ class Stack
         virtual ~Stack();
 
         Node* Head() {return head;}
+        bool Valid() {return valid;}
 
         void Push(float data);
         float Pop();
+        void Empty();
 
     protected:
         Node *head;

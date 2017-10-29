@@ -21,12 +21,8 @@
 
 using namespace std;
 
-int intakeNum(Calculator &myCalc);
-void buildScreen(short width);
-void buildSides(short width);
-void buildTop(short width);
-void buildBottom(short width);
-
+void buildScreen(short width, const string error, Calculator &myCalc);
+void buildBox(short width, short height, short x, short y);
 
 //Defines gotoxy() for ANSI C compilers.
 void gotoxy(short x, short y) {
@@ -34,82 +30,112 @@ void gotoxy(short x, short y) {
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
 
-
 int main()
 {
-    buildScreen(25);
-    int intake;
-    cin >> intake;
+    string intake, error = "";
 
-    /*
     Calculator myCalc;
 
-    bool running = true;
+    short nums;
 
-    int nums = 0;
+    while (true) { //Infite running loop until break
 
-    while (running) {
-        char inputC = 'a';
+        //Making things look nice
+        system("cls");
+        buildScreen(25, error, myCalc);
 
-        if (nums < 2) {
-            nums += intakeNum(myCalc);
-        } else {
-            cout << "Please enter an operator (+, -, *, /): ";
-            cin >> inputC;
+        gotoxy(5, 2);
+        cin >> intake;
 
-            if (!myCalc.PushOp(inputC)) {
-                cout << "That is not a valid operator" << endl;
+        //Registering number if present
+        for (unsigned int i = 0; i < intake.length(); i++) {
+            if (intake.c_str()[i] < 48 || intake.c_str()[i] > 57) {
+                error = true;
+                break;
+            } else if (i == intake.length() - 1) {
+                myCalc.Push(stof(intake));
+                error = "";
+                nums++;
             }
-
-            cout << myCalc.Pop()<< endl;
-
-            cout << "This equals: ";
-            cout << myCalc.Operate() << endl;
-
-            nums--;
         }
 
-        if (inputC == 'q' || inputC == 'Q') {
-            running = false;
+        //Quit program
+        if (intake.compare("quit") == 0 || intake.compare("Quit") == 0) {
+            gotoxy(0, 20);
+            break;
         }
-    }*/
+        //Standard operations
+        else if (intake.c_str()[0] == '+' || intake.c_str()[0] == '-' || intake.c_str()[0] == '*' || intake.c_str()[0] == '/') {
+            if (nums > 1) {
+                myCalc.Operate(intake.c_str()[0]);
+
+                nums--;
+
+                error = "";
+            } else {
+                error = "Not enough numbers for this operation";
+            }
+        }
+        //Swap
+        else if (intake.compare("swap") == 0 || intake.compare("Quit")) {
+            if (nums > 1) {
+                myCalc.Swap();
+
+                error = "";
+            } else {
+                error = "Not enough numbers for this operation";
+            }
+        }
+        //Clear
+        else if (intake.compare("clear") == 0 || intake.compare("Clear") == 0) {
+            myCalc.Empty();
+        }
+
+    }
 
     return 0;
 }
 
-int intakeNum(Calculator &myCalc) {
-    float input = 0;
+void buildScreen(short width, const string error, Calculator &myCalc) {
 
-    cout << "Please enter a number: ";
-    if (!(cin >> input)) {
-        cerr << "That was not a valid number" << endl;
-        cin.clear();
-        return 0;
+    buildBox(width, 3, 3, 0); //Typing box
+
+    buildBox(width, 10, 3, 6); //Command list
+
+    buildBox(5, 5, 35, 0); //Stack contents box
+
+    float temp[20] = {};
+
+    short nums = 0;
+
+    //Showing stack contents
+    while (myCalc.Valid()) {
+        temp[nums] = myCalc.Pop();
+
+        gotoxy(36, nums + 1);
+        cout << temp[nums];
+
+        nums++;
     }
 
-    myCalc.Push(input);
+    //Refilling stack
+    for (int i = nums - 1; i >= 0; i--) {
+        myCalc.Push(temp[i]);
+    }
 
-    return 1;
+    //Displaying error message
+    if (error.compare("") != 0) {
+        gotoxy(25,25);
+        cout << error;
+    }
+
 }
 
-void buildScreen(short width) {
-    buildTop(width);
-    buildSides(width);
-    buildBottom(width);
+//Draws a box of specified size at a specified point
+void buildBox (short width, short height, short x, short y) {
+    gotoxy(x, y); //Inital point setting
 
-}
-
-void buildSides(short width) {
-    char  vert = (char) (179);
-
-    cout << vert;
-
-    gotoxy(width + 1, 1);
-
-    cout << vert << endl;
-}
-
-void buildTop(short width) {
+    //Drawing top of box
     char topLeft = (218), hor = (196), topRight = (191);
 
     cout << topLeft;
@@ -119,10 +145,23 @@ void buildTop(short width) {
     }
 
     cout << topRight << endl;
-}
 
-void buildBottom(short width) {
-    char bottomLeft = (192), hor = (196), bottomRight = (217);
+    //Drawing sides of box
+    char  vert = (char) (179);
+
+    for (int i = 0; i < height; i++) {
+        gotoxy(x, y + i + 1);
+        cout << vert;
+
+        gotoxy(x + width + 1, y + i + 1);
+
+        cout << vert << endl;
+    }
+
+    //Drawing bottom of box
+    char bottomLeft = (192), bottomRight = (217);
+
+    gotoxy(x, y + height);
 
     cout << bottomLeft;
 

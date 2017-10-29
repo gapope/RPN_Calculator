@@ -24,3 +24,28 @@
 1509042168 d:\gregp\rpn_calculator\include\calculator.h
 	<Stack.h>
 
+1509312532 source:c:\users\gapop\documents\_codeblocks_projects\rpn_calculator\main.cpp
+	<iostream>
+	<cstring>
+	"Calculator.h"
+	<windows.h>
+	<ctime>
+
+1509310976 c:\users\gapop\documents\_codeblocks_projects\rpn_calculator\include\calculator.h
+	<Stack.h>
+
+1509312295 c:\users\gapop\documents\_codeblocks_projects\rpn_calculator\include\stack.h
+	"Node.h"
+
+1509137613 c:\users\gapop\documents\_codeblocks_projects\rpn_calculator\include\node.h
+
+1509312665 source:c:\users\gapop\documents\_codeblocks_projects\rpn_calculator\src\calculator.cpp
+	"Calculator.h"
+
+1509137613 source:c:\users\gapop\documents\_codeblocks_projects\rpn_calculator\src\node.cpp
+	"Node.h"
+
+1509312347 source:c:\users\gapop\documents\_codeblocks_projects\rpn_calculator\src\stack.cpp
+	"Stack.h"
+	<iostream>
+

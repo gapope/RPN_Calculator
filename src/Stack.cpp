@@ -13,9 +13,8 @@ void Stack::Push(float data) {
 }
 
 float Stack::Pop() {
-    if (head == nullptr) {
+    if (!valid) {
         std::cerr << "Accessing empty stack" << std::endl;
-        valid = false;
         return -1;
     }
 
@@ -23,9 +22,18 @@ float Stack::Pop() {
 
     head = head->Next();
 
+    if (head == nullptr) {
+        valid = false;
+    }
+
     return temp;
 }
 
+void Stack::Empty() {
+    while (valid) {
+        this->Pop();
+    }
+ }
 Stack::~Stack()
 {
     //dtor

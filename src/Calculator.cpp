@@ -5,55 +5,38 @@ Calculator::Calculator()
     //ctor
 }
 
-//Converts a char operator to a float so it can be added to stack
-bool Calculator::PushOp(char data) {
-    Node* newNode = new Node();
-
-    switch (data) {
-        case '+':
-            newNode->Setvalue(0);
-            break;
-        case '-':
-            newNode->Setvalue(1);
-            break;
-        case '*':
-            newNode->Setvalue(2);
-            break;
-        case '/':
-            newNode->Setvalue(3);
-            break;
-        default:
-            return false;
-    }
-
-    newNode->Setnext(head);
-
-    head = newNode;
-
-    return true;
-}
 
 //Performs a basic operation
-float Calculator::Operate() {
-    int op = this->Pop();
+float Calculator::Operate(char op) {
 
     float fA = this->Pop();
+
+    if (!valid) {
+        this->Push(fA);
+        return -1;
+    }
+
     float fB = this->Pop();
 
     float output = 0;
 
     switch (op) {
-        case 0:
+        case '+':
             output = fB + fA;
-        case 1:
+            break;
+        case '-':
             output = fB - fA;
-        case 3:
+            break;
+        case '*':
             output = fB * fA;
-        case 4:
+            break;
+        case '/':
             output = fB / fA;
+            break;
         default:
             output = -1;
     }
+
 
     this->Push(output);
     return output;

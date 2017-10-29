@@ -10,13 +10,16 @@ class Calculator : public Stack
         Calculator();
         virtual ~Calculator();
 
-        bool PushOp(char data);
-        float Operate();
+        float Operate(char op);
         bool Swap();
+
+        short Length() {return length;}
 
     protected:
 
     private:
+
+    short length;
 };
 
 #endif // CALCULATOR_H
