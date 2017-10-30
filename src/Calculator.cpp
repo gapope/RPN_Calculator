@@ -1,4 +1,5 @@
 #include "Calculator.h"
+#include <cmath>
 
 Calculator::Calculator()
 {
@@ -7,13 +8,13 @@ Calculator::Calculator()
 
 
 //Performs a basic operation
-float Calculator::Operate(char op) {
+void Calculator::Operate(char op) {
 
     float fA = this->Pop();
 
     if (!valid) {
         this->Push(fA);
-        return -1;
+        return;
     }
 
     float fB = this->Pop();
@@ -39,26 +40,30 @@ float Calculator::Operate(char op) {
 
 
     this->Push(output);
-    return output;
+}
+
+void Calculator::Root() {
+    if (!valid) {
+        return;
+    }
+    this->Push(sqrt(this->Pop()));
 }
 
 //reorders the top 2 digits
-bool Calculator::Swap() {
+void Calculator::Swap() {
 
     float fA = this->Pop();
 
     if (!this->valid) {
         this->Push(fA);
 
-        return false;
+        return;
     }
 
     float fB = this->Pop();
 
     this->Push(fA);
     this->Push(fB);
-
-    return true;
 }
 
 Calculator::~Calculator()

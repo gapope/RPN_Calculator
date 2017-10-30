@@ -18,7 +18,7 @@ class Stack
         void Empty();
 
     protected:
-        Node *head;
+        Node* head;
         bool valid;
 };
 

@@ -9,7 +9,7 @@ class Node
         Node(float val) {value = val;}
         virtual ~Node();
 
-        char Value() { return value; }
+        float Value() { return value; }
         void Setvalue(float val) { value = val; }
         Node* Next() { return next; }
         void Setnext(Node* val) { next = val; }

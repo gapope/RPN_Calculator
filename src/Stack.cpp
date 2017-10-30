@@ -2,9 +2,8 @@
 #include <iostream>
 
 void Stack::Push(float data) {
-    Node* newNode = new Node();
+    Node* newNode = new Node(data);
 
-    newNode->Setvalue(data);
     newNode->Setnext(head);
 
     head = newNode;
@@ -30,9 +29,7 @@ float Stack::Pop() {
 }
 
 void Stack::Empty() {
-    while (valid) {
-        this->Pop();
-    }
+    head = nullptr;
  }
 Stack::~Stack()
 {

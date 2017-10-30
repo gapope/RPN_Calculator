@@ -47,14 +47,14 @@ int main()
         gotoxy(5, 2);
         cin >> intake;
 
+        error = "";
+
         //Registering number if present
         for (unsigned int i = 0; i < intake.length(); i++) {
             if (intake.c_str()[i] < 48 || intake.c_str()[i] > 57) {
-                error = true;
                 break;
             } else if (i == intake.length() - 1) {
                 myCalc.Push(stof(intake));
-                error = "";
                 nums++;
             }
         }
@@ -70,8 +70,14 @@ int main()
                 myCalc.Operate(intake.c_str()[0]);
 
                 nums--;
-
-                error = "";
+            } else {
+                error = "Not enough numbers for this operation";
+            }
+        }
+        //Square rooting
+        else if (intake.compare("sqrt") == 0) {
+            if (nums > 0) {
+                myCalc.Root();
             } else {
                 error = "Not enough numbers for this operation";
             }
@@ -80,8 +86,6 @@ int main()
         else if (intake.compare("swap") == 0 || intake.compare("Quit")) {
             if (nums > 1) {
                 myCalc.Swap();
-
-                error = "";
             } else {
                 error = "Not enough numbers for this operation";
             }
@@ -89,6 +93,9 @@ int main()
         //Clear
         else if (intake.compare("clear") == 0 || intake.compare("Clear") == 0) {
             myCalc.Empty();
+        }
+        else {
+            error = "Invalid number or command";
         }
 
     }
@@ -102,25 +109,24 @@ void buildScreen(short width, const string error, Calculator &myCalc) {
 
     buildBox(width, 10, 3, 6); //Command list
 
-    buildBox(5, 5, 35, 0); //Stack contents box
+    gotoxy(5, 7);
 
-    float temp[20] = {};
+    cout << "+    -    *    /  clear";
 
-    short nums = 0;
+    buildBox(10, 3, 35, 0); //Stack contents box
 
     //Showing stack contents
-    while (myCalc.Valid()) {
-        temp[nums] = myCalc.Pop();
+    if (myCalc.Valid()) {
+        gotoxy(36, 1);
+        cout << myCalc.Head()->Value();
 
-        gotoxy(36, nums + 1);
-        cout << temp[nums];
-
-        nums++;
-    }
-
-    //Refilling stack
-    for (int i = nums - 1; i >= 0; i--) {
-        myCalc.Push(temp[i]);
+        if (myCalc.Head()->Next() != nullptr) {
+            gotoxy(36, 2);
+            cout << myCalc.Head()->Next()->Value();
+        }
+    } else { //No values in stack
+        gotoxy(36, 1);
+        cout << "empty";
     }
 
     //Displaying error message
