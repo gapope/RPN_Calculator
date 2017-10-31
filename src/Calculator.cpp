@@ -6,7 +6,6 @@ Calculator::Calculator()
     //ctor
 }
 
-
 //Performs a basic operation
 void Calculator::Operate(char op) {
 
@@ -38,20 +37,31 @@ void Calculator::Operate(char op) {
             output = -1;
     }
 
-
     this->Push(output);
 }
 
+//Calculates one number to the power of another
+void Calculator::Exp() {
+    if (!valid) {
+        return;
+    }
+
+    float fA = this->Pop(), fB = this->Pop();
+
+    this->Push(pow(fA, fB));
+}
+
+//Calculates the square root of a number
 void Calculator::Root() {
     if (!valid) {
         return;
     }
+
     this->Push(sqrt(this->Pop()));
 }
 
-//reorders the top 2 digits
+//Reorders the top 2 digits
 void Calculator::Swap() {
-
     float fA = this->Pop();
 
     if (!this->valid) {

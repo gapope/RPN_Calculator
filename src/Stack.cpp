@@ -29,7 +29,9 @@ float Stack::Pop() {
 }
 
 void Stack::Empty() {
-    head = nullptr;
+    while (valid) {
+        this->Pop();
+    }
  }
 Stack::~Stack()
 {

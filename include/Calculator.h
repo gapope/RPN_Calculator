@@ -11,16 +11,11 @@ class Calculator : public Stack
         virtual ~Calculator();
 
         void Operate(char op);
-        void Root();
         void Swap();
-
-        short Length() {return length;}
-
-    protected:
-
-    private:
-
-    short length;
+        void Exp();
+        void Root();
+        void Pi() {this->Push(3.14159);}
+        void e() {this->Push(2.71828);}
 };
 
 #endif // CALCULATOR_H
