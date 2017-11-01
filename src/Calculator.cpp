@@ -6,6 +6,22 @@ Calculator::Calculator()
     //ctor
 }
 
+//Reorders the top 2 digits
+void Calculator::Swap() {
+    float fA = this->Pop();
+
+    if (!valid) {
+        this->Push(fA);
+
+        return;
+    }
+
+    float fB = this->Pop();
+
+    this->Push(fA);
+    this->Push(fB);
+}
+
 //Performs a basic operation
 void Calculator::Operate(char op) {
 
@@ -41,39 +57,50 @@ void Calculator::Operate(char op) {
 }
 
 //Calculates one number to the power of another
-void Calculator::Exp() {
-    if (!valid) {
-        return;
+void Calculator::Power() {
+    if (valid) {
+        float fA = this->Pop(), fB = this->Pop();
+        this->Push(pow(fA, fB));
     }
-
-    float fA = this->Pop(), fB = this->Pop();
-
-    this->Push(pow(fA, fB));
 }
 
-//Calculates the square root of a number
+//Calculates the square root of the top value
 void Calculator::Root() {
-    if (!valid) {
-        return;
-    }
-
-    this->Push(sqrt(this->Pop()));
+    if (valid)
+        this->Push(sqrt(this->Pop()));
 }
 
-//Reorders the top 2 digits
-void Calculator::Swap() {
-    float fA = this->Pop();
-
-    if (!this->valid) {
-        this->Push(fA);
-
-        return;
+//Calculates the sine value of the top value
+void Calculator::Sine() {
+    if (valid){
+        if (rad) {
+            this->Push(sin(this->Pop()));
+        } else {
+            this->Push(sin(this->Pop() * pi / 180));
+        }
     }
+}
 
-    float fB = this->Pop();
+//Calculates the cosine value of the top value
+void Calculator::Cosine() {
+    if (valid){
+        if (rad) {
+            this->Push(cos(this->Pop()));
+        } else {
+            this->Push(cos(this->Pop() * pi / 180));
+        }
+    }
+}
 
-    this->Push(fA);
-    this->Push(fB);
+//Calculates the tangent value of the top value
+void Calculator::Tangent() {
+    if (valid){
+        if (rad) {
+            this->Push(tan(this->Pop()));
+        } else {
+            this->Push(tan(this->Pop() * pi / 180));
+        }
+    }
 }
 
 Calculator::~Calculator()

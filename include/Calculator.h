@@ -8,14 +8,32 @@ class Calculator : public Stack
 {
     public:
         Calculator();
+        Calculator(bool angles) {rad = angles;}
         virtual ~Calculator();
 
-        void Operate(char op);
+        //Number control
         void Swap();
-        void Exp();
+
+        //General
+        void Operate(char op);
+
+        //Power
+        void Power();
         void Root();
-        void Pi() {this->Push(3.14159);}
-        void e() {this->Push(2.71828);}
+
+        //Trig
+        void SetRad(bool value) {rad = value;}
+        void Sine();
+        void Cosine();
+        void Tangent();
+
+        //Constants
+        void Pi() {this->Push(pi);}
+        void E() {this->Push(e);}
+
+    private:
+        bool rad;
+        const float pi = 3.14159, e = 2.71828;
 };
 
 #endif // CALCULATOR_H

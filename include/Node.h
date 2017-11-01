@@ -9,12 +9,11 @@ class Node
         Node(float val) {value = val;}
         virtual ~Node();
 
-        float Value() { return value; }
-        void Setvalue(float val) { value = val; }
+        //get and set for each value
+        float Value() {return value;}
+        void Setvalue(float val) {value = val;}
         Node* Next() { return next; }
-        void Setnext(Node* val) { next = val; }
-
-    protected:
+        void Setnext(Node* val) {next = val;}
 
     private:
         float value;
