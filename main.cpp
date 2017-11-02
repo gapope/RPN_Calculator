@@ -110,7 +110,7 @@ bool commandCheck(Calculator &myCalc, short &nums, const string &intake, string 
     //Square rooting
     else if (intake.compare("sqrt") == 0 || intake.compare("") == 0) {
         if (!myCalc.Root()) {
-            error = "Not enough numbers for this operation";
+            error = "Unable to complete this operation";
         }
     }
     //Setting calc to degrees
@@ -144,13 +144,13 @@ bool commandCheck(Calculator &myCalc, short &nums, const string &intake, string 
     //Logarithm
     else if (intake.compare("log") == 0 || intake.compare("Log") == 0) {
         if (!myCalc.Logarithm()) {
-            error = "Unable to complete operation";
+            error = "Unable to complete this operation";
         }
     }
     //natural logarithm
     else if (intake.compare("ln") == 0 || intake.compare("Ln") == 0) {
         if (!myCalc.Ln()) {
-            error = "Unable to complete operation";
+            error = "Unable to complete this operation";
         }
     }
     //Pi Constant

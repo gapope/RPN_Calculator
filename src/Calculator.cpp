@@ -91,7 +91,7 @@ bool Calculator::Power() {
 
 //Calculates the square root of the top value
 bool Calculator::Root() {
-    if (valid) {
+    if (valid && head->Value() > 0) {
         this->Push(sqrt(this->Pop()));
         return true;
     }
