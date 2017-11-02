@@ -69,9 +69,7 @@ int main() {
 bool commandCheck(Calculator &myCalc, short &nums, const string &intake, string &error) {
     //Swap
     if (intake.compare("swap") == 0 || intake.compare("Swap") == 0) {
-        if (nums > 1) {
-            myCalc.Swap();
-        } else {
+        if (!myCalc.Swap()){
             error = "Not enough numbers for this operation";
         }
     }
@@ -82,31 +80,28 @@ bool commandCheck(Calculator &myCalc, short &nums, const string &intake, string 
     }
     //Remove top number
     else if (intake.compare("remove") == 0 || intake.compare("Remove") == 0) {
-        myCalc.Pop();
-        nums--;
-    }
-    //Standard operations
-    else if ((intake.at(0) == '+' || intake.at(0) == '-' || intake.at(0) == '*' || intake.at(0) == '/') && intake.length() == 0) {
-        if (nums > 1) {
-            myCalc.Operate(intake.at(0));
-
+        if (nums > 0) {
+            myCalc.Pop();
             nums--;
         } else {
             error = "Not enough numbers for this operation";
         }
     }
+    //Standard operations
+    else if ((intake.at(0) == '+' || intake.at(0) == '-' || intake.at(0) == '*' || intake.at(0) == '/') && intake.length() == 1 ) {
+        if (!myCalc.Operate(intake.at(0))) {
+            error = "Unable to complete this operation";
+        }
+    }
     //Absolute value
     else if (intake.compare("abs") == 0 || intake.compare("Abs") == 0 ) {
-        if (nums > 0) {
-            myCalc.Absolute();
-        } else {
+        if (!myCalc.Absolute()) {
             error = "Not enough numbers for this operation";
         }
     }
     //second last input to the power of last input
     else if (intake.compare("pow") == 0 || intake.compare("Pow") == 0 || intake.compare("^") == 0) {
-        if (nums > 1) {
-            myCalc.Power();
+        if (myCalc.Power()) {
             nums--;
         } else {
             error = "Not enough numbers for this operation";
@@ -114,9 +109,7 @@ bool commandCheck(Calculator &myCalc, short &nums, const string &intake, string 
     }
     //Square rooting
     else if (intake.compare("sqrt") == 0 || intake.compare("") == 0) {
-        if (nums > 0) {
-            myCalc.Root();
-        } else {
+        if (!myCalc.Root()) {
             error = "Not enough numbers for this operation";
         }
     }
@@ -132,46 +125,32 @@ bool commandCheck(Calculator &myCalc, short &nums, const string &intake, string 
     }
     //Finding sine
     else if (intake.compare("sin") == 0 || intake.compare("Sin") == 0) {
-        if (nums > 0) {
-            myCalc.Sine();
-        } else {
+        if (!myCalc.Sine()) {
             error = "Not enough numbers for this operation";
         }
     }
     //Finding sine
     else if (intake.compare("cos") == 0 || intake.compare("Cos") == 0) {
-        if (nums > 0) {
-            myCalc.Cosine();
-        } else {
+        if (!myCalc.Cosine()) {
             error = "Not enough numbers for this operation";
         }
     }
     //Finding sine
     else if (intake.compare("tan") == 0 || intake.compare("Tan") == 0) {
-        if (nums > 0) {
-            myCalc.Tangent();
-        } else {
+        if (!myCalc.Tangent()) {
             error = "Not enough numbers for this operation";
         }
     }
     //Logarithm
     else if (intake.compare("log") == 0 || intake.compare("Log") == 0) {
-        if (nums < 1) {
-            error = "Not enough numbers for this operation";
-        } else if (myCalc.Head()->Value() < 1) {
-            error = "Invalid number for this operation";
-        } else {
-            myCalc.Logarithm();
+        if (!myCalc.Logarithm()) {
+            error = "Unable to complete operation";
         }
     }
     //natural logarithm
     else if (intake.compare("ln") == 0 || intake.compare("Ln") == 0) {
-        if (nums < 1) {
-            error = "Not enough numbers for this operation";
-        } else if (myCalc.Head()->Value() < 1){
-            error = "Invalid number for this operation";
-        } else {
-            myCalc.Ln();
+        if (!myCalc.Ln()) {
+            error = "Unable to complete operation";
         }
     }
     //Pi Constant
@@ -195,7 +174,6 @@ bool commandCheck(Calculator &myCalc, short &nums, const string &intake, string 
 
 //Function to analyse input string and see if it is a valid number
 void numCheck(Calculator &myCalc, short &nums, const string &intake, string &error) {
-    bool negative = false;
 
     //Registering number if present
     for (unsigned int i = 0; i < intake.length(); i++) {

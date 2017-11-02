@@ -1,6 +1,7 @@
 #include "Stack.h"
 #include <iostream>
 
+//Creates a new node and adds it to the top of the stack
 void Stack::Push(float data) {
     Node* newNode = new Node(data);
 
@@ -11,6 +12,7 @@ void Stack::Push(float data) {
     valid = true;
 }
 
+//Outputs value of head and removes this node from the stack
 float Stack::Pop() {
     if (!valid) {
         std::cerr << "Accessing empty stack" << std::endl;
@@ -28,11 +30,13 @@ float Stack::Pop() {
     return temp;
 }
 
+//Dumps the contents of the stack
 void Stack::Empty() {
     while (valid) {
         this->Pop();
     }
  }
+
 Stack::~Stack()
 {
     //dtor

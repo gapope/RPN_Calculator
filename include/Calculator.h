@@ -12,25 +12,25 @@ class Calculator : public Stack
         virtual ~Calculator();
 
         //Number control
-        void Swap();
+        bool Swap();
 
         //General
-        void Operate(char op);
-        void Absolute();
+        bool Operate(char op);
+        bool Absolute();
 
         //Power
-        void Power();
-        void Root();
+        bool Power();
+        bool Root();
 
         //Trig
         void SetRad(bool value) {rad = value;}
-        void Sine();
-        void Cosine();
-        void Tangent();
+        bool Sine();
+        bool Cosine();
+        bool Tangent();
 
         //Logarithmic
-        void Logarithm();
-        void Ln();
+        bool Logarithm();
+        bool Ln();
 
         //Constants
         void Pi() {this->Push(pi);}
