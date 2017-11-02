@@ -72,7 +72,7 @@ void Calculator::Root() {
 
 //Calculates the sine value of the top value
 void Calculator::Sine() {
-    if (valid){
+    if (valid) {
         if (rad) {
             this->Push(sin(this->Pop()));
         } else {
@@ -83,7 +83,7 @@ void Calculator::Sine() {
 
 //Calculates the cosine value of the top value
 void Calculator::Cosine() {
-    if (valid){
+    if (valid) {
         if (rad) {
             this->Push(cos(this->Pop()));
         } else {
@@ -94,13 +94,25 @@ void Calculator::Cosine() {
 
 //Calculates the tangent value of the top value
 void Calculator::Tangent() {
-    if (valid){
+    if (valid) {
         if (rad) {
             this->Push(tan(this->Pop()));
         } else {
             this->Push(tan(this->Pop() * pi / 180));
         }
     }
+}
+
+//Calculates the log of the top value
+void Calculator::Logarithm() {
+    if (valid)
+        this->Push(log10(this->Pop()));
+}
+
+//Calculates the log of the top value
+void Calculator::Ln() {
+    if (valid)
+        this->Push(log(this->Pop()));
 }
 
 Calculator::~Calculator()

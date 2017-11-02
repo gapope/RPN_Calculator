@@ -54,15 +54,13 @@ int main() {
 
         if (intake.compare("quit") == 0 || intake.compare("Quit") == 0) { //Does the user want to quit
             break;
-        } else {
-            if (!commandCheck(myCalc, nums, intake, message)) { //Did they enter a command?
-                numCheck(myCalc, nums, intake, message); //If not, was it a number
-            }
+        } else if (!commandCheck(myCalc, nums, intake, message)) { //Did they enter a command?
+            numCheck(myCalc, nums, intake, message); //If not, was it a number
         }
     }
 
     gotoxy(3, 20);
-    cout << "Thanks for using my RPN calculator" << endl;
+    cout << "Thanks for using this RPN calculator" << endl;
 
     return 0;
 }
@@ -148,6 +146,22 @@ bool commandCheck(Calculator &myCalc, short &nums, const string &intake, string 
             error = "Not enough numbers for this operation";
         }
     }
+    //Logarithm
+    else if (intake.compare("log") == 0 || intake.compare("Log") == 0) {
+        if (nums > 0) {
+            myCalc.Logarithm();
+        } else {
+            error = "Not enough numbers for this operation";
+        }
+    }
+    //natural logarithm
+    else if (intake.compare("ln") == 0 || intake.compare("Ln") == 0) {
+        if (nums > 0) {
+            myCalc.Ln();
+        } else {
+            error = "Not enough numbers for this operation";
+        }
+    }
     //Pi Constant
     else if (intake.compare("pi") == 0 || intake.compare("Pi") == 0) {
         myCalc.Pi();
@@ -190,7 +204,7 @@ void buildScreen(Calculator &myCalc, const string &message) {
     buildBox(25, 10, 3, 5);
 
     gotoxy(5, 6);
-    cout << "+    -    *    / ";
+    cout << "+    -    *    /";
 
     gotoxy(5, 8);
     cout << "pow  sqrt";
@@ -199,6 +213,9 @@ void buildScreen(Calculator &myCalc, const string &message) {
     cout << "sin cos tan  deg  rad";
 
     gotoxy(5, 12);
+    cout << "log  ln";
+
+    gotoxy(5, 14);
     cout << "pi e";
 
     //Command list

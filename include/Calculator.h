@@ -27,6 +27,10 @@ class Calculator : public Stack
         void Cosine();
         void Tangent();
 
+        //Logarithmic
+        void Logarithm();
+        void Ln();
+
         //Constants
         void Pi() {this->Push(pi);}
         void E() {this->Push(e);}
