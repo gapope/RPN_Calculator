@@ -86,11 +86,19 @@ bool commandCheck(Calculator &myCalc, short &nums, const string &intake, string 
         nums--;
     }
     //Standard operations
-    else if (intake.at(0) == '+' || intake.at(0) == '-' || intake.at(0) == '*' || intake.at(0) == '/') {
+    else if ((intake.at(0) == '+' || intake.at(0) == '-' || intake.at(0) == '*' || intake.at(0) == '/') && intake.length() == 0) {
         if (nums > 1) {
             myCalc.Operate(intake.at(0));
 
             nums--;
+        } else {
+            error = "Not enough numbers for this operation";
+        }
+    }
+    //Absolute value
+    else if (intake.compare("abs") == 0 || intake.compare("Abs") == 0 ) {
+        if (nums > 0) {
+            myCalc.Absolute();
         } else {
             error = "Not enough numbers for this operation";
         }
@@ -148,18 +156,22 @@ bool commandCheck(Calculator &myCalc, short &nums, const string &intake, string 
     }
     //Logarithm
     else if (intake.compare("log") == 0 || intake.compare("Log") == 0) {
-        if (nums > 0) {
-            myCalc.Logarithm();
-        } else {
+        if (nums < 1) {
             error = "Not enough numbers for this operation";
+        } else if (myCalc.Head()->Value() < 1) {
+            error = "Invalid number for this operation";
+        } else {
+            myCalc.Logarithm();
         }
     }
     //natural logarithm
     else if (intake.compare("ln") == 0 || intake.compare("Ln") == 0) {
-        if (nums > 0) {
-            myCalc.Ln();
-        } else {
+        if (nums < 1) {
             error = "Not enough numbers for this operation";
+        } else if (myCalc.Head()->Value() < 1){
+            error = "Invalid number for this operation";
+        } else {
+            myCalc.Ln();
         }
     }
     //Pi Constant
@@ -183,9 +195,11 @@ bool commandCheck(Calculator &myCalc, short &nums, const string &intake, string 
 
 //Function to analyse input string and see if it is a valid number
 void numCheck(Calculator &myCalc, short &nums, const string &intake, string &error) {
+    bool negative = false;
+
     //Registering number if present
     for (unsigned int i = 0; i < intake.length(); i++) {
-        if (intake.at(i) < '0' || intake.at(i) > '9') {
+        if (intake.at(0) != '-'  && (intake.at(i) < '0' || intake.at(i) > '9')) {
             break;
         } else if (i == intake.length() - 1) {
             myCalc.Push(stof(intake));
@@ -216,7 +230,7 @@ void buildScreen(Calculator &myCalc, const string &message) {
     cout << "log  ln";
 
     gotoxy(5, 14);
-    cout << "pi e";
+    cout << "pi e              abs";
 
     //Command list
     buildBox(7, 8, 35, 5);

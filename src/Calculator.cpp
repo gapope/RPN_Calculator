@@ -56,6 +56,12 @@ void Calculator::Operate(char op) {
     this->Push(output);
 }
 
+//Calculates absolute value of the top value
+void Calculator::Absolute() {
+    if (valid)
+        this->Push(fabs(this->Pop()));
+}
+
 //Calculates one number to the power of another
 void Calculator::Power() {
     if (valid) {

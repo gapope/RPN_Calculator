@@ -16,6 +16,7 @@ class Calculator : public Stack
 
         //General
         void Operate(char op);
+        void Absolute();
 
         //Power
         void Power();
