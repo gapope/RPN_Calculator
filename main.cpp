@@ -6,7 +6,7 @@
  *	Purpose:                                                                 *
  *	    A calculator which uses reverse-polish notation                      *
  *	Usage:                                                                   *
- *	                                                                         *
+ *	    Run and input a single number, operation, or command at a time       *
  *	Revision History:                                                        *
  *	                                                                         *
  *	Known Issues:                                                            *
@@ -88,7 +88,8 @@ bool commandCheck(Calculator &myCalc, short &nums, const string &intake, string 
         }
     }
     //Standard operations
-    else if ((intake.at(0) == '+' || intake.at(0) == '-' || intake.at(0) == '*' || intake.at(0) == '/') && intake.length() == 1 ) {
+    else if ((intake.at(0) == '+' || intake.at(0) == '-' || intake.at(0) == '*'
+              || intake.at(0) == '/') && intake.length() == 1 ) {
         if (!myCalc.Operate(intake.at(0))) {
             error = "Unable to complete this operation";
         }
@@ -100,7 +101,8 @@ bool commandCheck(Calculator &myCalc, short &nums, const string &intake, string 
         }
     }
     //second last input to the power of last input
-    else if (intake.compare("pow") == 0 || intake.compare("Pow") == 0 || intake.compare("^") == 0) {
+    else if (intake.compare("pow") == 0 || intake.compare("Pow") == 0
+              || intake.compare("^") == 0) {
         if (myCalc.Power()) {
             nums--;
         } else {
@@ -187,42 +189,49 @@ void numCheck(Calculator &myCalc, short &nums, const string &intake, string &err
     }
 }
 
-//Function to build calculator interface including take and display boxes as well and command/operator lists
+//Function to build calculator interface including take and display
+//boxes as well and command/operator lists
 void buildScreen(Calculator &myCalc, const string &message) {
     //Typing box
     buildBox(25, 3, 3, 0);
 
     //Operation list
-    buildBox(25, 10, 3, 5);
+    buildBox(25, 10, 3, 7);
 
-    gotoxy(5, 6);
-    cout << "+    -    *    /";
+    gotoxy(3, 6); //Box title
+    cout << "Operators:";
 
     gotoxy(5, 8);
-    cout << "pow  sqrt";
+    cout << "+    -    *    /";
 
     gotoxy(5, 10);
-    cout << "sin cos tan  deg  rad";
+    cout << "pow  sqrt";
 
     gotoxy(5, 12);
-    cout << "log  ln";
+    cout << "sin cos tan  deg  rad";
 
     gotoxy(5, 14);
+    cout << "log  ln";
+
+    gotoxy(5, 16);
     cout << "pi e              abs";
 
     //Command list
-    buildBox(7, 8, 35, 5);
+    buildBox(7, 8, 35, 7);
 
-    gotoxy(36, 6);
-    cout << "clear";
+    gotoxy(35, 6); //Box title
+    cout << "Commands:";
 
     gotoxy(36, 8);
-    cout << "remove";
+    cout << "clear";
 
     gotoxy(36, 10);
-    cout << "swap";
+    cout << "remove";
 
     gotoxy(36, 12);
+    cout << "swap";
+
+    gotoxy(36, 14);
     cout << "quit";
 
     //Stack contents box
@@ -244,7 +253,7 @@ void buildScreen(Calculator &myCalc, const string &message) {
 
     //Displaying info message
     if (!message.empty()) {
-        gotoxy(4, 4);
+        gotoxy(3, 4);
         cout << message;
     }
 }
